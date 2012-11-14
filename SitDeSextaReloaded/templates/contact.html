@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block Title %}
+    Sit de Sexta! - Contato (ALPHA)
+{% endblock %}
+
+{% load thumbnail %}
+
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/contato.css"/>
+{% endblock %}
+
+{% block extra_js %}
+
+{% endblock %}
+
+{% block content %}
+
+    {% if mostrar %}<h3>{{ mostrar }}</h3>{% endif %}
+
+    <h1>Informe seus dados abaixo:</h1>
+    <hr>
+    <form method="post">
+        {% csrf_token %}
+        <table>
+            {{ form }}
+
+            <tr>
+                <th>&nbsp;</th>
+                <td><input class="btn btn-info" type="submit" value="Enviar contato"/></td>
+            </tr>
+        </table>
+    </form>
+
+{% endblock %}
+

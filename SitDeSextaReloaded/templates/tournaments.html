@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block Title %}
+    Sit de Sexta! - Tournaments (ALPHA)
+{% endblock %}
+
+{% load thumbnail %}
+
+{% block extra_css %}{% endblock %}
+
+{% block extra_js %}{% endblock %}
+
+{% block content %}
+    <h1>Não perca os ultimos torneios</h1>
+
+    <hr>
+
+    {% for tournament in tournaments %}
+        <div class="span9">
+            <h2>{{ tournament.name }}</h2>
+            <p>{{ tournament.description }}</p>
+
+            <div class="span3">
+                <h4>Details</h4>
+                <p>Buy-In: R$ {{ tournament.buy_in }} </p>
+                <p>Re-Buy: R$ {{ tournament.rebuy }} </p>
+                <p>Add-On: R$ {{ tournament.add_on }} </p>
+            </div>
+
+            <div class="span3">
+                <h4>Prize Pool</h4>
+                <ul>
+                    {% for itm in tournament.itm_set.all %}
+                        <li>{{ itm.position }} - R$ {{ itm.final_value }} - {{ itm.player }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+
+        </div>
+        <div class="span3">
+            <p><a class="btn btn-info " href="/tournaments/{{ tournament.pk }}"><i class="icon-share"></i> See More</a></p>
+        </div>
+    {% endfor %}
+{% endblock %}

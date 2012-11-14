@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block Title %}
+    Sit de Sexta! - Home (ALPHA)
+{% endblock %}
+
+{% load thumbnail %}
+
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/master.css"/>
+{% endblock %}
+
+{% block extra_js %}
+
+{% endblock %}
+
+{% block content %}
+
+    {% csrf_token %}
+
+
+    <div class="hero-unit">
+        <h1>Não perca a ação!</h1>
+        <p>Aqui no sit de sexta você acompanha tudo que está acontecendo nos torneios ao seu redor, chame seu amigo e organize aquele
+            torneio semanal, poste e discuta aquela Bad Beat na mesa final e poste tudo nas redes sociais para todos ficarem sabendo!</p>
+        <p><a class="btn btn-primary btn-large" href="{% url userena_signup %}">Cadastre-Se Agora! &raquo;</a></p>
+    </div>
+
+
+    <div class="row-fluid">
+        {% for new in news %}
+            <div class="span4">
+                <h2>{{ new.title }}</h2>
+                <p>{{ new.content }} </p>
+                <p><a class="btn" href="/news/{{ new.id }}">View details &raquo;</a></p>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
+

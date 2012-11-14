@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block Title %}
+    Sit de Sexta! - {{ flatpage.title }} (ALPHA)
+{% endblock %}
+
+{% load thumbnail %}
+
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/flatpage.css"/>
+{% endblock %}
+
+{% block extra_js %}
+
+{% endblock %}
+
+{% block content %}
+
+    <h1>{{ flatpage.title }}</h1>
+    <hr>
+    <p>{{ flatpage.content|linebreaks }}</p>
+
+{% endblock %}

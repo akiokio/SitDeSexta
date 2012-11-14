@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+
+{% block Title %}
+    Sit de Sexta! - {{ tournament.name }} (ALPHA)
+{% endblock %}
+
+{% load thumbnail %}
+
+{% block extra_css %}{% endblock %}
+
+{% block extra_js %}{% endblock %}
+
+{% load comments %}
+
+{% block content %}
+
+    <div class="span12">
+
+        <h1>{{ tournament.name }}</h1>
+        <hr>
+        <div class="">
+            {% if tournament.logo %}
+                <ul class="thumbnails">
+                    <li>
+                        <a href="#" class="thumbnail" >
+                            <img src="{{ tournament.logo|thumbnail_url:'tournament_logo' }}">
+                        </a>
+                    </li>
+                </ul>
+            {% endif %}
+            <p>{{ tournament.description }}</p>
+        </div>
+        <div class="row-fluid">
+            <div class="span6">
+                <h4>Estrutura</h4>
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <td>buy_in: </td>
+                            <td>$ {{ tournament.buy_in }}</td>
+                        </tr>
+                        <tr>
+                            <td>qty_chips_buy_in: </td>
+                            <td>{{ tournament.qty_chips_buy_in }}</td>
+                        </tr>
+                        <tr>
+                            <td>rebuy: </td>
+                            <td>$ {{ tournament.rebuy }}</td>
+                        </tr>
+                        <tr>
+                            <td>qty_chips_rebuy: </td>
+                            <td>{{ tournament.qty_chips_rebuy }}</td>
+                        </tr>
+                        <tr>
+                            <td>add_on: </td>
+                            <td>$ {{ tournament.add_on }}</td>
+                        </tr>
+                        <tr>
+                            <td>add_on: </td>
+                            <td>{{ tournament.qty_chips_add_on }}</td>
+                        </tr>
+                        <tr>
+                            <td>location: </td>
+                            <td>{{ tournament.location }}</td>
+                        </tr>
+                        <tr>
+                            <td>start_at: </td>
+                            <td>{{ tournament.start_at }}</td>
+                        </tr>
+                        <tr>
+                            <td>total_avaliable_points</td>
+                            <td>{{ tournament.total_avaliable_points }}</td>
+                        </tr>
+                        <tr>
+                            <td>total_money</td>
+                            <td>$ {{ tournament.total_money }}</td>
+                        </tr>
+                        <tr>
+                            <td>total_buy_in</td>
+                            <td>{{ tournament.total_buy_in }}</td>
+                        </tr>
+                        <tr>
+                            <td>total_rebuy</td>
+                            <td>{{ tournament.total_rebuy }}</td>
+                        </tr>
+                        <tr>
+                            <td>total_add_on</td>
+                            <td>{{ tournament.total_add_on }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="span6">
+                <h4>Premiação</h4>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Position</th>
+                            <th>Player Name</th>
+                            <th>Money</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for itm_player in tournament.itm_set.all %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ itm_player.player.user }} {% if itm_player.player.nickname %}- ({{ itm_player.player.nickname }}){% endif %}</td>
+                                <td>$ {{ itm_player.final_value }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+
+        <div>
+            <div class="span3">
+                <h3>Envie um comentario</h3>
+                <hr>
+                {% render_comment_form for tournament %}
+            </div>
+            <div class="span8">
+                <h3>Comentarios</h3>
+                <hr>
+                {% get_comment_list for tournament as comentarios %}
+                {% for comentario in comentarios %}
+                <div>
+                    Nome: {{ comentario.name }}
+                    {% if comentario.url %}URL: {{ comentario.url }}{% endif %}<br />
+                    {{ comentario.comment|linebreaks }}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

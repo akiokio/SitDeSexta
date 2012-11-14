@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block Title %}
+    Sit de Sexta! - {{ new.title }}
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/news.css"/>
+{% endblock %}
+
+{% block extra_js %}
+
+{% endblock %}
+
+{% block content %}
+
+    {% load thumbnail %}
+
+    <div class="span12">
+        <h1>{{ new.title }}</h1>
+
+        <h6>{{ new.user.name }} - {{ new.pub_date }}</h6>
+        <hr>
+        <div class="">
+            <ul class="thumbnails">
+                <li class="" style="margin: 0 auto;">
+                    <a href="#" class="thumbnail" >
+                        <img src="{{ new.photo.url }}" alt="">
+                    </a>
+                </li>
+            </ul>
+        </div>
+            <p>{{ new.content }}</p>
+    </div>
+
+
+{% endblock %}
