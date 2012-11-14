@@ -1,0 +1,12 @@
+.center {
+    margin:auto;
+    width:70%;
+}
+html body {
+    background: #FFFEFF url('../static/img/get_Better_bg.png') repeat-y center top;
+}
+
+.box {
+    box-shadow: 0 0 3px #999;
+    background-color: #EEE;
+}
